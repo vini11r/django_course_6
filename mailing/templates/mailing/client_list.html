@@ -1,0 +1,30 @@
+{% extends 'postman/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        <a class="btn btn-primary mb-3" href="#" role="button">Добавить
+            клиента</a>
+        {% for client in object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ client.email | capfirst }}</h4>
+                </div>
+                <div class="card-body">
+                    {% if client.last_name %}
+                    <div class="mb-1 text-body-secondary">{{ client.first_name }} {{ client.last_name }}</div>
+                    {% elif not client.last_name %}
+                    <div class="mb-1 text-body-secondary">{{ client.first_name }}</div>
+                    {% endif %}
+                    <p class="card-text mb-auto">{{ client.comment|truncatechars:100 }}</p>
+                    <a class="btn btn-primary" href="#" role="button">Просмотр</a>
+                    <a class="btn btn-primary" href="#"
+                       role="button">Редактировать</a>
+                </div>
+                <a class="btn btn-primary" href="#" role="button">Удалить</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'postman/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        <a class="btn btn-primary mb-3" href="#" role="button">Добавить
+            сообщение</a>
+        {% for massage in object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ massage.title | capfirst }}</h4>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-primary" href="#" role="button">Просмотр</a>
+                    <a class="btn btn-primary" href="#"
+                       role="button">Редактировать</a>
+                </div>
+                <a class="btn btn-primary" href="#" role="button">Удалить</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

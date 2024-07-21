@@ -1,0 +1,18 @@
+{% extends 'postman/base.html' %}
+{% block content %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for mailing in object_list %}
+     <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ mailing.name | capfirst }} </h4>
+                    <h4 class="my-0 font-weight-normal"> Статус: {{mailing.get_status_display}} </h4>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-primary" href="{%url 'postman:mailing_detail' mailing.pk %}" role="button">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
