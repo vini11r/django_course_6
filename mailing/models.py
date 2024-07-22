@@ -9,7 +9,7 @@ class Client(models.Model):
     first_name = models.CharField(max_length=150, verbose_name="Имя", **NULLABLE)
     last_name = models.CharField(max_length=150, verbose_name="Фамилия", **NULLABLE)
     comment = models.TextField(verbose_name="Комментарий", **NULLABLE)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Владелец')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.email}"
@@ -57,8 +57,8 @@ class MailingSettings(models.Model):
     message = models.ForeignKey(
         "MailingMessage", on_delete=models.CASCADE, verbose_name="сообщения", **NULLABLE
     )
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    clients = models.ManyToManyField(Client, related_name="mailing_settings")
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Владелец')
+    clients = models.ManyToManyField(Client, related_name="mailing_settings", verbose_name="Клиенты")
 
     def __str__(self):
         return f"{self.start_time} / {self.period}"
