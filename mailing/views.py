@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from mailing.forms import MailingSettingsForm, ClientForm
 from mailing.models import MailingSettings, Client, MailingMessage
 
@@ -9,11 +9,20 @@ class MailingListView(ListView):
     model = MailingSettings
     template_name = "mailing/mailingsettings_list.html"
 
+    def get_context_data(self):
+        context = super().get_context_data()
+        # context['blog_list'] = Blog.objects.order_by('?')[:3]
+        return context
 
-class MailingSettingCreateView(CreateView):
+
+class MailingSettingCreateView(LoginRequiredMixin, CreateView):
     model = MailingSettings
     form_class = MailingSettingsForm
     success_url = reverse_lazy("mailing:mailing_list")
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 
 class MailingSettingUpdateView(UpdateView):
