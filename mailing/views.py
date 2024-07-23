@@ -25,18 +25,18 @@ class MailingSettingCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class MailingSettingUpdateView(UpdateView):
+class MailingSettingUpdateView(LoginRequiredMixin, UpdateView):
     model = MailingSettings
     form_class = MailingSettingsForm
     success_url = reverse_lazy("mailing:mailing_list")
 
 
-class MailingSettingDeleteView(DeleteView):
+class MailingSettingDeleteView(LoginRequiredMixin, DeleteView):
     model = MailingSettings
     success_url = reverse_lazy("mailing:mailing_list")
 
 
-class MailingSettingDetailView(DetailView):
+class MailingSettingDetailView(LoginRequiredMixin, DetailView):
     model = MailingSettings
     template_name = "mailing/mailingsettings_detail.html"
 
