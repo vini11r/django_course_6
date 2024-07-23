@@ -1,7 +1,6 @@
 {% extends 'mailing/base.html' %}
 {% block content %}
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    {{ key }}
     {% for mailing in object_list %}
      <div class="col-3">
             <div class="card mb-4 box-shadow">
@@ -11,7 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <a class="btn btn-primary" href="{%url 'postman:mailing_detail' mailing.pk %}" role="button">Подробнее</a>
+                    <a class="btn btn-primary" href="{% url 'mailing:mailing_detail' mailing.pk %}" role="button">Подробнее</a>
                 </div>
             </div>
         </div>

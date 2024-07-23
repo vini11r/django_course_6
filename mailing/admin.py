@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from mailing.models import Client, MailingMessage
+from mailing.models import Client, MailingMessage, MailingSettings
 
 
 @admin.register(Client)
@@ -15,3 +15,10 @@ class MailingMessageAdmin(admin.ModelAdmin):
     list_display = ('id', 'subject', 'letter', 'owner',)
     list_filter = ('subject', 'owner',)
     search_fields = ('subject', 'owner',)
+
+
+@admin.register(MailingSettings)
+class MailingSettingsAdmin(admin.ModelAdmin):
+    list_display = ('start_time', 'end_time', 'period', 'status', 'message', 'owner',)
+    list_filter = ('start_time', 'status', 'owner',)
+    search_fields = ('clients', 'owner',)
