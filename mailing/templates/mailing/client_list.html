@@ -2,8 +2,6 @@
 {% block content %}
 <div class="container">
     <div class="row text-center">
-        <a class="btn btn-primary mb-3" href="#" role="button">Добавить
-            клиента</a>
         {% for client in object_list %}
         <div class="col-3">
             <div class="card mb-4 box-shadow">
@@ -17,11 +15,9 @@
                     <div class="mb-1 text-body-secondary">{{ client.first_name }}</div>
                     {% endif %}
                     <p class="card-text mb-auto">{{ client.comment|truncatechars:100 }}</p>
-                    <a class="btn btn-primary" href="#" role="button">Просмотр</a>
-                    <a class="btn btn-primary" href="#"
-                       role="button">Редактировать</a>
+                    <a class="btn btn-primary" href="{% url 'mailing:client_detail' client.pk %}" role="button">Просмотр</a>
                 </div>
-                <a class="btn btn-primary" href="#" role="button">Удалить</a>
+                <a class="btn btn-danger mb-3" href="{% url 'mailing:client_delete' client.pk %}" role="button">Удалить</a>
             </div>
         </div>
         {% endfor %}

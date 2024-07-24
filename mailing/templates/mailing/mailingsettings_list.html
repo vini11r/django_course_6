@@ -5,12 +5,14 @@
      <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{ mailing.name | capfirst }} </h4>
+                    <h4 class="my-0 font-weight-normal">{{ mailing.pk | capfirst }} </h4>
                     <h4 class="my-0 font-weight-normal"> Статус: {{mailing.get_status_display}} </h4>
                 </div>
 
                 <div class="card-body">
+                    {% if user.is_authenticated %}
                     <a class="btn btn-primary" href="{% url 'mailing:mailing_detail' mailing.pk %}" role="button">Подробнее</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
