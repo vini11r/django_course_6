@@ -1,12 +1,13 @@
 import secrets
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, UpdateView
 
 from config.settings import EMAIL_HOST_USER
-from users.forms import UserRegisterForm, UserUpdateForm
+from users.forms import UserRegisterForm, UserUpdateModeratorForm, UserProfileForm
 from users.models import User
 
 
@@ -44,7 +45,17 @@ class UserListView(ListView):
     template_name = 'users/user_list.html'
 
 
-class UserUpdateView(UpdateView):
+class UserModeratorView(LoginRequiredMixin, UpdateView):
     model = User
-    form_class = UserUpdateForm
+    form_class = UserUpdateModeratorForm
     success_url = reverse_lazy('users:user_list')
+
+
+class ProfileView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserProfileForm
+    template_name = 'users/user_form.html'
+    success_url = reverse_lazy('users:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user

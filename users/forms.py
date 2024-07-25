@@ -11,8 +11,18 @@ class UserRegisterForm(StyleFormMixin, UserCreationForm):
         fields = ("email", "password1", "password2")
 
 
-class UserUpdateForm(StyleFormMixin, forms.ModelForm):
+class UserUpdateModeratorForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = User
         fields = ('is_active',)
+
+
+class UserProfileForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password'].widget = forms.HiddenInput()
 
