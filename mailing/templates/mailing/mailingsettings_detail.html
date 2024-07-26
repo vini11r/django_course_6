@@ -16,7 +16,9 @@
                     {% endfor %}
                     <p class="text-md-start">Статус: {{ object.get_status_display | capfirst }}</p>
                     <a class="btn btn-primary mb-3" href="{% url 'mailing:mailing_update' object.pk %}" role="button">Редактировать</a>
+                    {% if user == mailing.owner %}
                     <a class="btn btn-primary mb-3" href="{% url 'mailing:mailing_delete' object.pk %}" role="button">Удалить</a>
+                    {% endif %}
                     <a class="btn btn-primary mb-3" href="{% url 'mailing:mailing_list' %}" role="button">Назад</a>
                     {% endif %}
                 </div>

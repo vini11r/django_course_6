@@ -65,6 +65,10 @@ class MailingSettings(models.Model):
     class Meta:
         verbose_name = "Настройки рассылки"
         verbose_name_plural = "Настройки рассылок"
+        permissions = [
+            ("switch_status", "изменение статуса"),
+            ("view_mailing", "отображать рассылки")
+        ]
 
 
 class MailingMessage(models.Model):

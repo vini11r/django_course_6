@@ -3,6 +3,7 @@
 <div class="container">
     <div class="row text-center">
         {% for client in object_list %}
+        {% if user == client.owner %}
         <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
@@ -20,6 +21,7 @@
                 <a class="btn btn-danger mb-3" href="{% url 'mailing:client_delete' client.pk %}" role="button">Удалить</a>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>

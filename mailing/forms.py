@@ -23,7 +23,7 @@ class MailingSettingsForm(StyleFormMixin, forms.ModelForm):
 class MailingSettingsManagerForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = MailingSettings
-        fields = ('start_time', 'end_time', 'period', 'status', 'message', 'clients',)
+        fields = ('status',)
 
 
 class ClientForm(StyleFormMixin, forms.ModelForm):
