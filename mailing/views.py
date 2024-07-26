@@ -97,13 +97,29 @@ class MessageCreateView(LoginRequiredMixin, CreateView):
     fields = '__all__'
     success_url = reverse_lazy('mailing:message_list')
 
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
 
 class MessageUpdateView(LoginRequiredMixin, UpdateView):
     model = MailingMessage
     fields = '__all__'
     success_url = reverse_lazy('mailing:message_list')
 
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        if obj.owner == self.request.user:
+            return obj
+        raise PermissionDenied
+
 
 class MessageDeleteView(LoginRequiredMixin, DeleteView):
     model = MailingMessage
     success_url = reverse_lazy('mailing:message_list')
+
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        if obj.owner == self.request.user:
+            return obj
+        raise PermissionDenied
