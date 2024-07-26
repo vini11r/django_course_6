@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from mailing.forms import MailingSettingsForm, ClientForm, MailingSettingsManagerForm
-from mailing.models import MailingSettings, Client, MailingMessage
+from mailing.models import MailingSettings, Client, MailingMessage, MailingLog
 
 
 class MailingListView(ListView):
@@ -123,3 +123,10 @@ class MessageDeleteView(LoginRequiredMixin, DeleteView):
         if obj.owner == self.request.user:
             return obj
         raise PermissionDenied
+
+
+class MailingLogListView(LoginRequiredMixin, ListView):
+    model = MailingLog
+    template_name = 'mailing/mailinglog_list.html'
+
+

@@ -1,12 +1,12 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
-from django.core.management import BaseCommand
+from django.core.management.base import BaseCommand
 from django_apscheduler import util
 from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
 
 from config import settings
-from mailing.services import send_mail
+from mailing.services.send_mail import send_all_mails
 
 
 @util.close_old_connections
@@ -19,9 +19,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         scheduler = BlockingScheduler(timezone=settings.TIME_ZONE)
-        scheduler.add_job(DjangoJobStore(), "default")
+        scheduler.add_jobstore(DjangoJobStore(), "default")
 
-        scheduler.add_job(send_mail,
+        scheduler.add_job(send_all_mails,
                           trigger=CronTrigger(second="*/30"),
                           id="sendmail",
                           max_instances=10,
