@@ -1,0 +1,35 @@
+[
+  {
+    "model": "mailing.client",
+    "pk": 1,
+    "fields": {
+      "email": "testgornostaev@yandex.ru",
+      "first_name": "Pavel",
+      "last_name": "Pavel",
+      "comment": "",
+      "owner": 2
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 2,
+    "fields": {
+      "email": "testdrivepavel@yandex.ru",
+      "first_name": "Василий",
+      "last_name": "Васильев",
+      "comment": "",
+      "owner": 4
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 3,
+    "fields": {
+      "email": "klient@email.com",
+      "first_name": "Kilen",
+      "last_name": "Klient",
+      "comment": "",
+      "owner": 1
+    }
+  }
+]

@@ -1,0 +1,84 @@
+[
+  {
+    "model": "mailing.client",
+    "pk": 1,
+    "fields": {
+      "email": "testgornostaev@yandex.ru",
+      "first_name": "Pavel",
+      "last_name": "Pavel",
+      "comment": "",
+      "owner": 2
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 2,
+    "fields": {
+      "email": "testdrivepavel@yandex.ru",
+      "first_name": "Василий",
+      "last_name": "Васильев",
+      "comment": "",
+      "owner": 4
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 3,
+    "fields": {
+      "email": "klient@email.com",
+      "first_name": "Kilen",
+      "last_name": "Klient",
+      "comment": "",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 2,
+    "fields": {
+      "start_time": "2024-07-26T19:36:00Z",
+      "end_time": "2024-07-29T09:30:00Z",
+      "period": "weekly",
+      "status": "created",
+      "message": 1,
+      "owner": 1,
+      "clients": [
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 3,
+    "fields": {
+      "start_time": "2024-07-26T09:30:00Z",
+      "end_time": "2024-07-29T09:30:00Z",
+      "period": "Ежедневно",
+      "status": "created",
+      "message": 2,
+      "owner": 2,
+      "clients": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingmessage",
+    "pk": 1,
+    "fields": {
+      "subject": "TEST",
+      "letter": "Задача организации, в особенности же дальнейшее развитие различных форм деятельности влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствующей насущным потребностям.",
+      "owner": 2
+    }
+  },
+  {
+    "model": "mailing.mailingmessage",
+    "pk": 2,
+    "fields": {
+      "subject": "TEST2",
+      "letter": "Таким образом, новая модель организационной деятельности играет важную роль в формировании новых предложений? Практический опыт показывает, что рамки и место обучения кадров способствует подготовке и реализации экономической целесообразности принимаемых решений.",
+      "owner": 4
+    }
+  }
+]

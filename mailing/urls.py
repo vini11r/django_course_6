@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 from mailing.apps import MailingConfig
 from mailing.views import MailingListView, MailingSettingCreateView, MailingSettingDetailView, \
@@ -9,7 +10,7 @@ from mailing.views import MailingListView, MailingSettingCreateView, MailingSett
 app_name = MailingConfig.name
 
 urlpatterns = [
-    path('', MailingListView.as_view(), name='mailing_list'),
+    path('', cache_page(60)(MailingListView.as_view()), name='mailing_list'),
     path('create/', MailingSettingCreateView.as_view(), name='mailing_create'),
     path('detail/<int:pk>/', MailingSettingDetailView.as_view(), name='mailing_detail'),
     path('update/<int:pk>/', MailingSettingUpdateView.as_view(), name='mailing_update'),
