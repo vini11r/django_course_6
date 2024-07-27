@@ -3,6 +3,7 @@ from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
+from blog.models import Blog
 from mailing.forms import MailingSettingsForm, ClientForm, MailingSettingsManagerForm
 from mailing.models import MailingSettings, Client, MailingMessage, MailingLog
 
@@ -11,10 +12,13 @@ class MailingListView(ListView):
     model = MailingSettings
     template_name = "mailing/mailingsettings_list.html"
 
-    # def get_context_data(self):
-    #     context = super().get_context_data()
-    #     # context['blog_list'] = Blog.objects.order_by('?')[:3]
-    #     return context
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['blog_list'] = Blog.objects.order_by('?')[:3]
+        context['mailing_all'] = len(MailingSettings.objects.all())
+        context['mailing_active'] = len(MailingSettings.objects.filter(status='started'))
+        context['client_unique'] = len(Client.objects.all().distinct())
+        return context
 
 
 class MailingSettingCreateView(LoginRequiredMixin, CreateView):
