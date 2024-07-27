@@ -45,6 +45,12 @@ class MailingSettingDeleteView(LoginRequiredMixin, DeleteView):
     model = MailingSettings
     success_url = reverse_lazy("mailing:mailing_list")
 
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        if obj.owner == self.request.user:
+            return obj
+        raise PermissionDenied
+
 
 class MailingSettingDetailView(LoginRequiredMixin, DetailView):
     model = MailingSettings
