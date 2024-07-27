@@ -20,13 +20,13 @@ def send_email(message_client, message_settings):
         MailingLog.objects.create(
             status=MailingLog.STATUS_OK,
             settings=message_settings,
-            client_id=message_client,
+            client=message_client,
         )
-    except smtplib.SMTPException as e:
+    except Exception as e:
         MailingLog.objects.create(
             status=MailingLog.STATUS_FAILED,
             settings=message_settings,
-            client_id=message_client,
+            client=message_client,
             server_response=str(e),
         )
 
